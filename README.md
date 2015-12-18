@@ -9,7 +9,7 @@
   <a href="https://github.com/fastlane/deliver">deliver</a> &bull; 
   <a href="https://github.com/fastlane/snapshot">snapshot</a> &bull; 
   <a href="https://github.com/fastlane/frameit">frameit</a> &bull; 
-  <a href="https://github.com/fastlane/PEM">PEM</a> &bull; 
+  <a href="https://github.com/fastlane/pem">pem</a> &bull; 
   <a href="https://github.com/fastlane/sigh">sigh</a> &bull; 
   <a href="https://github.com/fastlane/produce">produce</a> &bull;
   <a href="https://github.com/fastlane/cert">cert</a> &bull;
@@ -17,7 +17,8 @@
   <b>pilot</b> &bull;
   <a href="https://github.com/fastlane/boarding">boarding</a> &bull;
   <a href="https://github.com/fastlane/gym">gym</a> &bull;
-  <a href="https://github.com/fastlane/scan">scan</a>
+  <a href="https://github.com/fastlane/scan">scan</a> &bull;
+  <a href="https://github.com/fastlane/match">match</a>
 </p>
 -------
 
@@ -233,13 +234,14 @@ pilot import -c ~/Desktop/testers.csv
 - [`snapshot`](https://github.com/fastlane/snapshot): Automate taking localized screenshots of your iOS app on every device
 - [`frameit`](https://github.com/fastlane/frameit): Quickly put your screenshots into the right device frames
 - [`produce`](https://github.com/fastlane/produce): Create new iOS apps on iTunes Connect and Dev Portal using the command line
-- [`PEM`](https://github.com/fastlane/PEM): Automatically generate and renew your push notification profiles
+- [`pem`](https://github.com/fastlane/pem): Automatically generate and renew your push notification profiles
 - [`sigh`](https://github.com/fastlane/sigh): Because you would rather spend your time building stuff than fighting provisioning
 - [`cert`](https://github.com/fastlane/cert): Automatically create and maintain iOS code signing certificates
 - [`spaceship`](https://github.com/fastlane/spaceship): Ruby library to access the Apple Dev Center and iTunes Connect
 - [`boarding`](https://github.com/fastlane/boarding): The easiest way to invite your TestFlight beta testers
 - [`gym`](https://github.com/fastlane/gym): Building your iOS apps has never been easier
 - [`scan`](https://github.com/fastlane/scan): The easiest way to run tests of your iOS and Mac app
+- [`match`](https://github.com/fastlane/match): Easily sync your certificates and profiles across your team using git
 
 ##### [Like this tool? Be the first to know about updates and new fastlane tools](https://tinyletter.com/krausefx)
 
@@ -251,10 +253,17 @@ If you run into any issues you can use the `verbose` mode to get a more detailed
 
 ## Firewall Issues
 
-`pilot` uses the iTunes Transporter to upload metadata and binaries. In case you are behind a firewall, you can specify a different transporter protocol using
+`pilot` uses the iTunes Transporter to upload metadata and binaries. In case you are behind a firewall, you can specify a different transporter protocol from the command line using
 
 ```
 DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS="-t DAV" pilot ...
+```
+
+If you are using `pilot` via the [fastlane action](https://github.com/fastlane/fastlane/blob/master/docs/Actions.md#pilot), add the following to your `Fastfile`
+
+```
+ENV["DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS"] = "-t DAV"
+pilot...
 ```
 
 ## How is my password stored?

@@ -21,7 +21,7 @@ module Pilot
           uploaded_build = wait_for_processing_build
           distribute_build(uploaded_build, options)
 
-          Helper.log.info "Successfully distribute build to beta testers 🚀"
+          Helper.log.info "Successfully distributed build to beta testers 🚀"
         end
       else
         raise "Error uploading ipa file, more information see above".red
@@ -106,7 +106,8 @@ module Pilot
       uploaded_build.update_build_information!(whats_new: options[:changelog])
 
       # Submit for internal beta testing
-      uploaded_build.build_train.update_testing_status!(true, 'external')
+      type = options[:distribute_external] ? 'external' : 'internal'
+      uploaded_build.build_train.update_testing_status!(true, type)
       return true
     end
   end
